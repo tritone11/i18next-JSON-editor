@@ -47,5 +47,13 @@ Example of supported JSON file:
 - Quick translation suggest Google Translate  
 - Yandex translation API for automatic translation  
 - Match languages  
-Match 2 languages to find missing categories, missing attributes and missing translations 
+Match 2 languages to find missing categories, missing attributes and missing translations  
+
+# Getting started  
+  
+## Make your Firebase project  
+ies18 is based on a Google Firebase Database. You can easily create a totally free Firebase project at https://firebase.google.com/  
+Get started and name your project. Once created and you're in the console, click on "Add your Firebase to your web app" and you will find the snippet to paste in the config.js file.  
+
+
 
