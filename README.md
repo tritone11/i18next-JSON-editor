@@ -80,7 +80,7 @@ WORKING DEMO
 # Important notes  
   
 ## Browser compatibility  
-This tool makes extended use of the apex backtick `
+This tool makes extended use of the apex backtick ` which is supported only by browser supporting ECMAScript 6
 
 
 
