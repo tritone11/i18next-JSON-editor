@@ -75,7 +75,12 @@ Note that in order to work, the quick Google Translate suggestion needs that you
 Open your index.html on your website, your Firebase hosting or a software like hfs and you can start creating your language files or editing the ones you already have.  
 Clicking on the logo make a full backup that you can import anytime in the Firebase Console  
   
-WORKING DEMO
+WORKING DEMO  
+  
+# Important notes  
+  
+## Browser compatibility  
+This tool makes extended use of the apex backtick `
 
 
 
