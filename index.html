@@ -704,7 +704,7 @@ button:hover,input[type="button"]{
 		initLanguageSelect();//Call inizializzazione
 		function createLanguage(l){//Funzione di creazione di nuove lingue
 			if(l==''||hasWhiteSpace(l)||l.length>2){
-				show_modal('La lingua non può avere spazi bianchi, essere un campo vuoto ed essere più lunga di due caratteri')
+				show_modal('La lingua non puÃ² avere spazi bianchi, essere un campo vuoto ed essere piÃ¹ lunga di due caratteri')
 			}else{
 				firebase.database().ref(l).set({'root':{'root':'init'}});
 				languages.push(l);
@@ -935,8 +935,8 @@ var ihtml='<select style="display:inline-block" name="to" id="lang"><option valu
             //var a = gid('attribute').value;
             //var val = gid('valore').value;
             if (hasWhiteSpace(a)) {
-                //alert('il campo attributo non può avere spazi bianchi')
-				show_modal('il campo attributo non può avere spazi bianchi','error')
+                //alert('il campo attributo non puÃ² avere spazi bianchi')
+				show_modal('il campo attributo non puÃ² avere spazi bianchi','error')
             }
             else {
 			
@@ -955,8 +955,8 @@ var ihtml='<select style="display:inline-block" name="to" id="lang"><option valu
 						firebase.database().ref(languages[i]+'/'+p).set(v);
 					}});
 					}
-					if(log){show_modal('è stato creato il nuovo parent '+p+' ed è stato aggiunto {'+a+' : '+val+'} ad ogni lingua','success');}else{
-						gid('dialog-saving').innerHTML+='è stato creato il nuovo parent '+p+' ed è stato aggiunto {'+a+' : '+val+'} ad ogni lingua<br/>'
+					if(log){show_modal('Ã¨ stato creato il nuovo parent '+p+' ed Ã¨ stato aggiunto {'+a+' : '+val+'} ad ogni lingua','success');}else{
+						gid('dialog-saving').innerHTML+='Ã¨ stato creato il nuovo parent '+p+' ed Ã¨ stato aggiunto {'+a+' : '+val+'} ad ogni lingua<br/>'
 					}
 					//renderEditor();renderSelect();
 				}else{
@@ -990,8 +990,8 @@ var ihtml='<select style="display:inline-block" name="to" id="lang"><option valu
 			
 			}
 					
-					if(log){show_modal('è stato creato il nuovo parent '+p+' ed è stato aggiunto {'+a+' : '+val+'} alla lingua '+l,'success');}else{
-						gid('dialog-saving').innerHTML+='è stato creato il nuovo parent '+p+' ed è stato aggiunto {'+a+' : '+val+'} alla lingua '+l+'<br/>';
+					if(log){show_modal('Ã¨ stato creato il nuovo parent '+p+' ed Ã¨ stato aggiunto {'+a+' : '+val+'} alla lingua '+l,'success');}else{
+						gid('dialog-saving').innerHTML+='Ã¨ stato creato il nuovo parent '+p+' ed Ã¨ stato aggiunto {'+a+' : '+val+'} alla lingua '+l+'<br/>';
 					}
 					//renderEditor();renderSelect();
 				}
@@ -1040,7 +1040,7 @@ var ihtml='<select style="display:inline-block" name="to" id="lang"><option valu
             //var p = gid('parent').value;
             //var a = gid('dlt').value;
 			if (hasWhiteSpace(a)) {
-                show_modal('il campo attributo da rimuovere non può avere spazi bianchi','error');
+                show_modal('il campo attributo da rimuovere non puÃ² avere spazi bianchi','error');
             }else {
                 if (a != '') {
 				if(l=="Tutte"){
@@ -1090,7 +1090,7 @@ var ihtml='<select style="display:inline-block" name="to" id="lang"><option valu
   
 		fr.onload = function(e) { 
 			console.log(e);var l=gid('language').value;
-			var r = confirm("Stai caricando un file JSON alla lingua "+l+". SOVRASCRIVERA' i dati precedenti. Sei sicuro di voler continuare? Se non sei sicuro, effettua prima un backup scaricando la lingua selezionata con il suo bottone di download, altrimenti l'azione non potrà essere ripristinata.");
+			var r = confirm("Stai caricando un file JSON alla lingua "+l+". SOVRASCRIVERA' i dati precedenti. Sei sicuro di voler continuare? Se non sei sicuro, effettua prima un backup scaricando la lingua selezionata con il suo bottone di download, altrimenti l'azione non potrÃ  essere ripristinata.");
 			if (r == true) {
 				window.result = JSON.parse(e.target.result);
 				var formatted = JSON.stringify(result, null, 2);
@@ -1111,7 +1111,7 @@ var ihtml='<select style="display:inline-block" name="to" id="lang"><option valu
 		//UTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILS///////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        function hasWhiteSpace(s) {//Utilità per il check di spazi bianchi
+        function hasWhiteSpace(s) {//UtilitÃ  per il check di spazi bianchi
             return s.indexOf(' ') >= 0;
         }
 				function getRandomColor() {
@@ -1125,7 +1125,7 @@ var ihtml='<select style="display:inline-block" name="to" id="lang"><option valu
         function createParent(np,log){//Funzione di creazione di nuove categorie
             //var np=gid('newparent').value;
             if(np==''||hasWhiteSpace(np)){
-                show_modal('il parent non può essere vuoto o non può contenere spazi bianchi','error')
+                show_modal('il parent non puÃ² essere vuoto o non puÃ² contenere spazi bianchi','error')
             }else{
                 var p=gid('parent');ies.loading();
 				ies.ins(p,'option',['class','newparent'],np)
@@ -1141,7 +1141,7 @@ var ihtml='<select style="display:inline-block" name="to" id="lang"><option valu
 		listenResize();//Listening per il resize dei boxes sulla destra
 		
 var url = "https://translate.yandex.net/api/v1.5/tr.json/translate",
-    keyAPI = "trnsl.1.1.20170303T215707Z.31bbd841bc20f1b3.de54f27eb0b7271c3037015f8549ea414ed21c7a";
+    keyAPI = "YOURCUSTOMYEANDEXAPI";
 
 function tryTranslation(lang1,lang2,id){
 
