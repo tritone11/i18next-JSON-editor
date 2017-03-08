@@ -42,6 +42,7 @@ Example of supported JSON file:
 - Create attributes and values in selected category  
 - Delete categories  
 - Delete attributes  
+- Delete languages
 - Live attributes and value edit  
 - Quick translation suggest Google Translate  
 - Yandex translation API for automatic translation  
