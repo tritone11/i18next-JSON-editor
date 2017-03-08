@@ -87,7 +87,8 @@ You can only read, every write option is not allowed in the demo to prevent trol
 # Important notes  
   
 ## Browser compatibility  
-This tool makes extended use of the apex backtick ` which is supported only by browser supporting ECMAScript 6
+This tool makes extended use of the apex backtick ` which is supported only by browser supporting ECMAScript 6  
+To enable automatic translation with Yandex, add your API key in the index.html file at line 1144
 
 
 
