@@ -2,7 +2,7 @@
 This tool let upload, edit, download your language files of i18next for translation.
 
 ## Features
--v0.01 supports only one level of nested objects. 
+-v0.01 supports only one level of nested objects.   
   ###### Example of supported JSON file:
   ```
   {
@@ -16,7 +16,7 @@ This tool let upload, edit, download your language files of i18next for translat
       "street" : "Portobello Road, 14"
     }
   }
-  ```
+  ```  
   ###### Example of unsupported JSON file (to be supported in v0.02):
   ```
   {
