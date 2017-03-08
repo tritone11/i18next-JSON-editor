@@ -4,6 +4,7 @@ This tool let upload, edit, download your language files of i18next for translat
 ## Features  
 - v0.01 supports only one level of nested objects.   
 Example of supported JSON file:  
+
   ```
   {
     "common":{
@@ -18,6 +19,7 @@ Example of supported JSON file:
   }
   ```  
   Example of unsupported JSON file (to be supported in v0.02):  
+  
   ```
   {
     "common":{ 
