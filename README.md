@@ -67,7 +67,15 @@ In the database tab, set this rules:
   }
 }
 ```  
-Put the Gmail or Google Apps email addreses allowed to write on your database. '.read' is set as true to allow a quick download of the JSON files, but you can set it as false if you need to keep your files not readable from thirds.
+Put the Gmail or Google Apps email addreses allowed to write on your database. '.read' is set as true to allow a quick download of the JSON files, but you can set it as false if you need to keep your files not readable from thirds.  
+
+## Ready to start  
+You can now paste your Firebase snippet in the config.js file, where you can also set the default language, the default colors ...  
+Note that in order to work, the quick Google Translate suggestion needs that you name your languages with the standard TAGS (en, fr, de ,us ecc..)  
+Open your index.html on your website, your Firebase hosting or a software like hfs and you can start creating your language files or editing the ones you already have.  
+Clicking on the logo make a full backup that you can import anytime in the Firebase Console  
+  
+WORKING DEMO
 
 
 
