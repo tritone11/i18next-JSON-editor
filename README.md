@@ -1,9 +1,9 @@
 # ies18n - extended tool to edit your i18next JSON files
 This tool let upload, edit, download your language files of i18next for translation.
 
-## Features
+## Features  
 -v0.01 supports only one level of nested objects.   
-  ##### Example of supported JSON file:
+  ##### Example of supported JSON file:  
   ```
   {
     "common":{
@@ -17,7 +17,7 @@ This tool let upload, edit, download your language files of i18next for translat
     }
   }
   ```  
-  ##### Example of unsupported JSON file (to be supported in v0.02):
+  ##### Example of unsupported JSON file (to be supported in v0.02):  
   ```
   {
     "common":{ 
