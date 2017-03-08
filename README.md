@@ -76,6 +76,7 @@ Open your index.html on your website, your Firebase hosting or a software like h
 Clicking on the logo make a full backup that you can import anytime in the Firebase Console  
   
 WORKING DEMO  
+You can only read, every write option is not allowed in the demo to prevent troll edit
   
 # Important notes  
   
