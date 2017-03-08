@@ -43,5 +43,6 @@ This tool let upload, edit, download your language files of i18next for translat
 - Live attributes and value edit  
 - Quick translation suggest Google Translate  
 - Yandex translation API for automatic translation  
-- Match 2 languages to find missing categories, missing attributes and missing translations  
+- Match languages  
+   Match 2 languages to find missing categories, missing attributes and missing translations 
 
