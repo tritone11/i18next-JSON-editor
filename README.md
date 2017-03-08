@@ -2,6 +2,9 @@
 This tool let upload, edit, download your language files of i18next for translation.  
   
 [WORKING DEMO](http://cerati.org/ies18n/)  
+
+You can only read, every write option is not allowed in the demo to prevent troll edit
+ 
   
 ## Features  
 - v0.01 supports only one level of nested objects.   
