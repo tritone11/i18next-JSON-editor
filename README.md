@@ -36,4 +36,12 @@ This tool let upload, edit, download your language files of i18next for translat
   }
   ```
 -Create new languages files
--
+-Create new category
+-Create attributes and values in selected category
+-Delete categories
+-Delete attributes
+-Live attributes and value edit
+-Quick translation suggest Google Translate
+-Yandex translation API for automatic translation
+-Match 2 languages to find missing categories, missing attributes and missing translations
+
