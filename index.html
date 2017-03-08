@@ -1,0 +1,1204 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+	  <script type="text/javascript" src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+	  <script src="https://rawgit.com/metaschema/oxyzen/master/oxyzen.js"></script>
+	  <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
+	<script src="config.js"></script>
+<script>
+//////////////	ies18n v.0.01
+//////////////	Author: tRitone11 - ies italia 2017
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MAINCONFIG - GLOBAL VARIABLES - UTILITIES ////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+window.ies={};//Namespace
+window.langJSON=[];//Array dei JSON per le lingue
+window.loadv=0;//Variabile globale animazione loading
+
+window.$$=function(e){if(typeof e=='string'){e=document.getElementById(e);}return e;};//Selector
+ies.att=function(e,a,v){if(e){if(v){e.setAttribute(a,v);}else{return e.getAttribute(a)}}return false};//Setta e prende attributi
+ies.ins=function(p,tag,aa,_html,b){var i;var elm=document.createElement(tag);if(_html){elm.innerHTML=_html;}p=$$(p);if(aa){for(i=0;i<aa.length;i+=2){this.att(elm,aa[i],aa[i+1]);}}if(p){if(b==true){return p.insertBefore(elm,p.firstChild);}else if(b){return p.insertBefore(elm,b);}else{return p.appendChild(elm);}}else{return elm}};//Funzione per la creazione di elementi ies.ins(parent,tagname,[attributo,valore],innerHTML)
+ies.guid=function() {var s = function() {return (((1+Math.random())*0x10000)|0).toString(16).substring(1);};return (s()+s()+"-"+s()+"-"+s()+"-"+s()+"-"+s()+s()+s());};//Generatore di id
+ies.loading=function(){loadv=loadv+360;gid('matchresultloading').style.transform="rotate("+loadv+"deg)";if(loadv>=14000){loadv=0};};//Animazione loading
+window.gcls=function(cls){return document.getElementsByClassName(cls)};//class selector
+window.gtag=function(tag){return document.getElementsByTagName(tag)};//tag selector
+window.gatt=function(att,_val,_tag){if(_tag==undefined){_tag=''};if(_val==undefined){return document.querySelectorAll(_tag+'['+att+']')};return document.querySelectorAll(_tag+'['+att+'="'+_val+'"');};//attribute selector
+window.languages=[];//Array delle lingue presenti
+  // Initialize Firebase
+  
+ 
+  function _clear(){//Funzione di pulizia firebase
+			firebase.database().ref().off('child_added');
+		}
+		
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//SETTING AND LOADING OF LANGUAGES, PARENTS//SETTING AND LOADING OF LANGUAGES, PARENTS//////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  firebase.database().ref().on('child_added',function(s){var v=s.val();var k=s.key;languages.push(k);
+	langJSON.push(v);//Retrieve json language and push it in array
+  for (var key in v) {ies.loading();var p=document.getElementById('parent');if(k==languages[0]){
+	var o=document.createElement('option');o.innerHTML=key;p.appendChild(o);}}});
+	
+window.updateJSON=function(){
+	//TODO FUNZIONE DI UPDATE DELL'ARRAY DEI JSON
+}
+</script>
+<style>
+*{
+	font-family:monospace;
+}
+body{
+	
+	margin:0;
+	background:#292b2c;
+	color:white;
+}
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+.attribute-editor{
+	float: left;
+    width:30%;
+    border: 1px solid #ccc;
+    margin: 5px;
+    resize: vertical;
+    max-height: 35px;
+    min-height: 30px;
+    vertical-align: top;
+    box-sizing: border-box;
+    background-color: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #000000;
+    display: inline-block;
+	padding:2px 3px;
+}
+.value-editor{
+	float:left;
+	width:50%;
+	border:1px solid #ccc;
+	margin:5px;
+	resize:vertical;
+	vertical-align:top;
+	display:inline-block;
+	box-sizing: border-box;
+    background-color: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #000000;
+    display: inline-block;
+	padding:2px 3px;
+}
+.save-editor{
+    padding: 0;
+    margin: 5px;
+    min-height: 30px;
+    line-height: 30px;
+    float: left;
+    width: 7%;
+    display: inline-block;
+    vertical-align: top;
+    background-color: #98c887;
+    text-shadow: 1px 1px 3px black;
+    border: 1px solid #98c887;
+    border-radius: 5px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.66);
+    font-weight: bold;
+    color: #ffffff !important;
+}
+.save-editor:hover,.downloadjson:hover{
+	cursor:pointer;
+	color:white;
+	background-color:#2E86AB;
+}
+.downloadjson{
+	padding: 5px; */
+    margin: 5px;
+    min-height: 50px;
+    height: 50px;
+    line-height: 30px;
+    /* display: inline-block; */
+    vertical-align: top;
+    background-color: #2E86AB;
+    border: 2px solid #2E86AB;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    vertical-align: bottom;
+    text-decoration: none;
+    color: #ffffff;
+}
+#editor-target{
+padding: 20px;
+    border-left: 2px solid black;
+    box-sizing: border-box;
+    background-color: whitesmoke;
+    width: 50vw;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 50%;
+    box-shadow: inset 0px 0px 45px #302f5a;
+    overflow-y: scroll;
+}
+.log-button:hover{
+	cursor:pointer;
+	color:white;
+	background-color:#2E86AB;
+}
+.log-button{
+        height: 24px;
+    line-height: 6px;
+    /* float: left; */
+    margin: 0px 0px 5px 43px;
+    display: inline-block;
+    vertical-align: top;
+    background-color: transparent;
+    border: 2px solid yellow;
+    border-radius: 5px;
+    font-weight: bold;
+    color: yellow;
+}
+.save-all-button{
+    height: 40px;
+    width: 100%;
+    position: fixed;
+    line-height: 6px;
+    right: 50%;
+    width: 10%;
+    top: 0;
+    margin-bottom: 5px;
+    display: inline-block;
+    vertical-align: top;
+    background-color: #fdfeff;
+    border-top: 1px solid #e9eff1;
+    border-right: 1px solid #e2f4fb;
+    border-left: 3px solid #000000;
+    border-bottom: 3px solid #000000;
+    /* border-radius: 5px; */
+    font-weight: bold;
+    font-size: 25px;
+    color: #000000;
+}
+.save-all-button:active{
+
+    border-bottom: 1px solid #e9eff1;
+    border-left: 1px solid #e2f4fb;
+    border-right: 3px solid #2E86AB;
+    border-top: 3px solid #2E86AB;
+}
+.save-all-button:hover{
+	cursor:pointer;
+}
+#dialog-saving{
+	    position: fixed;
+    top: 5%;
+    left: 5%;
+    border: 1px solid black;
+    background-color: white;
+    width: 90vw;
+    padding: 10px;
+    height: 90vh;
+    box-shadow: 10px 10px 0px 1000px rgba(0,0,0,0.6);
+    box-sizing: border-box;
+    z-index: 10000;
+}
+#dialog-translation{
+	    position: fixed;
+    top: 5%;
+    left: 5%;
+    border: 1px solid black;
+    background-color: white;
+    width: 90vw;
+    padding: 10px;
+    height: 90vh;
+    box-shadow: 10px 10px 0px 1000px rgba(0,0,0,0.6);
+    box-sizing: border-box;
+    z-index: 10000;
+	color:black !important
+}
+#dialog-translation button, #dialog-translation option{
+	color:white !important
+}
+.toolong {
+  display: inline-block;
+    vertical-align: top;
+    width: 262px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+#matchresult{
+	    display: block;
+    padding: 38px;
+    border: 2px solid black;
+    width: 50vw;
+    overflow-y: scroll;
+    position: absolute;
+    height: 50%;
+    box-sizing: border-box;
+    right: 0;
+    bottom: 0;
+    background-color: #181529;
+    color: lime;
+}
+.matchresult{
+	width:100%;
+	height:100%;
+}
+#main{
+	width:50%;
+}
+button.save-editor.all-save.edited-save {
+    border: 2px solid #651414;
+    color: #fef6f6;
+    background-color: #f77070;
+}
+button ,input[type="button"]{
+    border: 1px solid #843aca;
+    color: white;
+    font-weight: bold;
+    font-family: monospace;
+    padding: 8px;
+    border-radius: 3px;
+    margin: 10px 5px 10px 5px;
+    background-color: #843aca;
+}
+input[type="text"] {
+    border: 2px solid #2E86AB;
+    padding: 7px;
+	color:#2E86AB
+}
+button:active{
+	background-color:red;
+}
+#resize-boxes{
+	    width: 50%;
+    position: absolute;
+    top: 49.5%;
+    height: 0.5vh;
+    border-bottom: 2px dashed black;
+    border-top: 2px dashed black;
+    background-color: #dfdfdf;
+    right: 0;
+	    box-shadow: 5px -8px 19px 1px rgba(0, 0, 0, 0.43);
+}
+#resize-boxes:hover{
+	cursor:row-resize;
+}
+.select-style {
+        padding: 0;
+    margin: 0;
+    /* border: 2px solid #000000; */
+    border-radius: 3px;
+    margin-bottom: 2px;
+    min-width: 80px;
+    overflow: hidden;
+    /* height: 20px; */
+    background-color: rgba(11, 11, 11, 0.27);
+    vertical-align: middle;
+    display: inline-block;
+    color: white;
+    background: rgba(0, 0, 0, 0.29) url(arrowdown.png) no-repeat 100% 50%;
+}
+
+.select-style select {
+    padding: 2px 2px 2px 12px;
+    /* margin-bottom: 2px; */
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    font-weight: bold;
+    background-color: transparent;
+    color: #ffffff;
+    background-image: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.select-style select:focus {
+    outline: none;
+}
+header{
+	    height: 59px;
+    width: 100%;
+    z-index: 5;
+    position: relative;
+    background-color: #271b68;
+    border-bottom: 1px solid #000000;
+    box-shadow: 1.4px 2.7px 8px 0 rgb(16, 18, 36);
+}
+#main-config{
+	    height: 100px;
+    z-index: 4;
+    /* background-color: rgba(252, 190, 167,1); */
+    padding: 20px;
+    background: radial-gradient(circle at 50% 1%, #474ebd, #371c84);
+    color: white;
+    box-shadow: 1.4px 2.7px 8px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+#main-create{
+	
+    color: white;
+    padding: 20px;
+    background: radial-gradient(circle at 50% 1%, #479c96, #24295c);
+    z-index: 3;
+    position: relative;
+    box-shadow: 1.4px 2.7px 8px 0 rgba(0, 0, 0, 0.2);
+}
+#main-config input[type="text"],#main-delete input[type="text"]{
+    border: none;
+    padding: 7px;
+    background-color: #2c2571;
+    color: #2E86AB;
+}
+#main-delete{
+	    min-height: 100px;
+    z-index: 2;
+    background-color: rgba(252, 190, 167,0.4);
+    padding: 20px;
+    min-height: 100px;
+    /* z-index: 1; */
+     background: radial-gradient(circle at 50% 1%, #474ebd, #371c84);
+    color: #ffffff;
+    box-shadow: 1.4px 2.7px 8px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+#main-import{
+	    min-height: 100px;
+    z-index: 0;
+    background-color: rgba(252, 190, 167,0.4);
+    padding: 20px;
+    min-height: 100px;
+     background: radial-gradient(circle at 50% 1%, #474ebd, #371c84);
+    color: #ffffff;
+    box-shadow: 1.4px 2.7px 8px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+#main-confronta{
+	min-height: 100px;
+    z-index: 1;
+        background: radial-gradient(circle at 50% 1%, #479c96, #24295c);
+		color:white;
+    padding: 20px;
+    box-shadow: 1.4px 2.7px 8px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+#matchresultloading{
+margin-top: 8px;
+    margin-left: 14px;
+    border-radius: 200px;
+    height: 46px;
+    transition: all 200ms ease;
+    transform: rotate(0deg);
+}
+.send{
+margin-top: 0px !important;
+    vertical-align: top;
+}
+a{
+	text-decoration:none;
+}
+button.translate-button {
+    margin-top: 5px;
+    height: 38px;
+    color: white !important;
+
+}
+button.translate-button a{
+	color: white !important;
+}
+header button {
+    /* margin-top: 17px; */
+    vertical-align: text-bottom;
+}
+#modal{
+	    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    height: 73px;
+    min-width: 50px;
+    background-color: black;
+    border-radius: 5px;
+    transition: all 200ms ease-in;
+    color: white;
+    z-index: 10000000000000000000;
+	text-shadow:1px 1px 5px black;
+    line-height: 30px;
+    padding: 20px;
+    font-size: 24px;
+    box-sizing: border-box;
+    font-weight: bold;
+    opacity: 0;
+}
+option {
+    background-color: #2c2471;
+    border: none;
+    color: white;
+}
+textarea#valore, #attribute {
+    background-color: rgba(0, 0, 0, 0.36);
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+button:hover,input[type="button"]{
+	cursor:pointer;
+}
+#result {
+  display:block;
+  width:400px;
+  height:200px;
+}
+
+#import {
+  margin:10px 0;
+}
+.googletranslate{
+	    display: inline-block;
+    margin-right: 10px;
+    background-color: #025944;
+    color: white !important;
+    padding: 0px 33px;
+    line-height: 40px;
+    border-radius: 13px;
+}
+#translate{
+	border: 1px solid #025944;
+    color: white;
+    font-weight: bold;
+    font-family: monospace;
+    padding: 8px;
+    border-radius: 10px;
+    margin: 10px 5px 10px 5px;
+    background-color: #025944;
+}
+#output{
+	    display: inline-block;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 7px 19px;
+}
+#button-use-translation{
+	    border: 1px solid #843aca;
+    color: white;
+    display:inline-block !important;
+    font-family: monospace;
+    padding: 8px;
+    border-radius: 3px;
+    margin: 10px 5px 10px 5px;
+    background-color: #843aca;
+}
+</style>
+</head>
+<body>
+    <div id="main">
+    <header>
+        <a href="https://languages-seafy.firebaseio.com/.json?print=pretty&format=export&download=languages-seafy-export.json"><img src="loading.png" id="matchresultloading" />
+        </a><span style="    font-size: 30px;line-height: 60px;vertical-align: top;font-weight: bold;color: white;margin-left: 10px;">ies18n</span>
+		<button onclick="login('google')" style="background-color: rgba(0, 255, 182, 0.86);
+    color: #271b68;
+    border: none;">LOGIN</button><button onclick="logout('google')" style="background-color:#271b68 ;
+    color: rgba(0, 255, 182, 0.86);
+    border: none;">LOGOUT</button>
+    </header>
+    <div id="main-config">
+        <div style="float:right">
+            <input type="text" placeholder="Language name" style="float: right;margin-top: 10px;" />
+            <button onclick="createLanguage(this.previousElementSibling.value)" style="float:right">Create new language</button>
+            <br/>
+            <input type="text" placeholder="Category name" id="newparent" style="float:right;margin-top:10px;" />
+            <input onclick="createParent(gid('newparent').value,true)" type="button" value="Create new category" style="float:right" />
+        </div>
+        <div>
+            <h3>Select a language and a category</h3>
+            <span style="width:150px;display:inline-block">Select language</span>
+            <div class="select-style">
+                <select id="language" onchange="var temp_v=gid('parent').value;renderSelect();gid('parent').value=temp_v;renderEditor();">
+
+                </select>
+            </div>
+            <br/>
+            <span style="width:150px;display:inline-block">Select category</span>
+            <div class="select-style">
+                <select id="parent" onchange="renderEditor()">
+
+                </select>
+            </div>
+        </div>
+    </div>
+    <div id="main-create">
+        <h3>Create a new {"category" : {"Key":"Value"}}</h3>
+        <textarea placeholder="Key" id="attribute"></textarea>
+        <textarea placeholder="Value" id="valore"></textarea>
+        <input type="button" onclick="send(gid('language').value,gid('parent').value,gid('valore').value,gid('attribute').value,true)" class="send" value="WRITE KEY"> </div>
+    <div id="main-delete">
+        <h3>Delete keys / categories / languages</h3>
+        <input type="text" placeholder="key to remove.." id="dlt" />
+        <input type="button" onclick="dlt(gid('language').value,gid('parent').value,gid('dlt').value)" class="send" style="background-color: #e10000;
+    border: none;" value="DELETE">
+	<input type="text" placeholder="category to remove.." id="dltCat" />
+        <input type="button" onclick="dltCat(gid('language').value,gid('dltCat').value,true)" class="send" style="background-color: #e10000;
+    border: none;" value="DELETE">
+	<input type="text" placeholder="language to remove.." id="dltLang" />
+        <input type="button" onclick="dltLang(gid('dltLang').value,true)" class="send" style="background-color: #e10000;
+    border: none;" value="DELETE">
+    </div>
+    <div id="main-confronta">
+        <h3>Match 2 languages to find missing categories, missing keys, missing translations</h3>
+        <div class="select-style">
+            <select id="confronta1">
+
+            </select>
+        </div>
+        <button onclick="matchLanguages(gid('confronta1').value,gid('confronta2').value);">MATCH</button>
+        <button onclick="invertMatch()" style="font-size: 17px;vertical-align: middle;"><i class="material-icons" style="font-size: 17px;vertical-align: middle;">compare_arrows</i>
+        </button>
+        <div class="select-style">
+            <select id="confronta2">
+
+            </select>
+        </div>
+        <label>Filter results</label>
+        <div class="select-style">
+            <select onchange="filterMatchResults(this)">
+                <option value="missing-category">Missing categories</option>
+                <option value="missing-attribute">Missing keys</option>
+                <option value="to-translate">Probable missing translations</option>
+            </select>
+        </div>
+    </div>
+	<div id="main-import">
+	<h3>Import custom JSON file in the selected language</h3>
+<input type="file" id="selectFiles" value="Import" style="    background-color: #2c2672;
+    padding: 20px;"/><br />
+<button id="import">Import</button>
+<textarea id="result" style="display:none">
+  
+</textarea>
+</div>
+    <br/>
+
+
+    <div id="dialog-saving" style="display:none">
+        <button onclick="this.parentElement.style.display='none'">Close</button>
+        <br/>
+    </div>
+    <div id="dialog-translation" style="display:none">
+        <button onclick="this.parentElement.style.display='none'">Close</button>
+        <br/>
+    </div>
+</div>
+<div id="editor-target" style=""></div>
+<div id="matchresult">
+    <div id="missing-category" class="matchresult">No missing categories
+        <br/>
+    </div>
+    <div id="missing-attribute" class="matchresult" style="display:none">No missing keys
+        <br/>
+    </div>
+    <div id="to-translate" class="matchresult" style="display:none">No missing translations
+        <br/>
+    </div>
+</div>
+
+<div id="resize-boxes"></div>
+<div style="position:absolute;bottom:0;right:50%;">
+    <label><b>DOWNLOAD json files of languages</b>
+    </label>
+    <br/>
+    <div id="download-buttons">
+
+
+    </div>
+</div>
+<div id="modal"></div>
+    <script>
+	
+	function login(provider){f$.login(provider);}
+	function logout(provider){f$.logout();location.reload()};
+	//Listener e funzioni di resize dei boxes
+	window.listenResize=function(){window.resizeBar=$$('resize-boxes');resizeBar.addEventListener('mousedown',function(){
+		//var button=it3.$$c('ion-navicon')[0]||it3.$$c('ion-ios-arrow-back')[0];
+		//button.classList.add('ion-ios-arrow-back');button.classList.remove('ion-navicon');
+		document.body.classList.remove('noleft');window.addEventListener('mousemove',_resizeBar,true);},false);
+	window.addEventListener('mouseup',function(){window.removeEventListener('mousemove',_resizeBar,true);},false);},
+	window._resizeBar=function(e){var div=$$('resize-boxes');var left=$$('editor-target');var wrap=$$('matchresult');
+		div.style.top=e.clientY+'px';wrap.style.height=window.innerHeight-e.clientY+'px';left.style.height=e.clientY+'px';},
+        window.gid = function (id) {
+            return document.getElementById(id);
+        };
+		
+	function pauseEvent(e){//Funzione di prevent default degli eventi
+    if(e.stopPropagation) e.stopPropagation();
+    if(e.preventDefault) e.preventDefault();
+    e.cancelBubble=true;
+    e.returnValue=false;
+    return false;
+}
+		function initLanguageSelect(){//Inizializzazione della select delle lingue
+		if(languages.length<1){setTimeout('initLanguageSelect()',1000)}else{
+			var ls=gid('language');
+			var c1=gid('confronta1');
+			var c2=gid('confronta2');
+			var db=gid('download-buttons');
+			c1.innerHTML='';
+			c2.innerHTML='';
+			ls.innerHTML='<option>Tutte</option>';
+			//console.log(languages);
+			
+			for(var i=0;i<languages.length;i++){
+			
+				var o=document.createElement('option');
+				o.innerHTML=languages[i];
+				ls.appendChild(o);
+				var o=document.createElement('option');
+				o.innerHTML=languages[i];
+				c1.appendChild(o);
+				var o=document.createElement('option');
+				o.innerHTML=languages[i];
+				c2.appendChild(o);
+				ies.ins(db,'div',['style','display:inline-block;margin: 5px;'],'<a class="downloadjson" style="background-color:'+getRandomColor()+';border:none" href="https://languages-seafy.firebaseio.com/'+languages[i]+'.json?print=pretty&format=export&download=languages-seafy-'+languages[i]+'-export.json"><i class="material-icons">file_download</i> '+languages[i]+'</a>');
+				//ies.ins(db,'br',false, false);
+				c1.value=defaultLanguage;
+				//c2.value=defaultLanguage;
+			}
+			ls.value=defaultLanguage;
+			
+			var temp_v=gid('parent').value;renderSelect();gid('parent').value=temp_v;renderEditor();
+			}
+		}
+		initLanguageSelect();//Call inizializzazione
+		function createLanguage(l){//Funzione di creazione di nuove lingue
+			if(l==''||hasWhiteSpace(l)||l.length>2){
+				show_modal('La lingua non può avere spazi bianchi, essere un campo vuoto ed essere più lunga di due caratteri')
+			}else{
+				firebase.database().ref(l).set({'root':{'root':'init'}});
+				languages.push(l);
+				location.reload();
+			};
+			
+		}
+		function renderTranslationDialog(l1,l2,k,v1,v2,a1){//Funzione di creazione del dialog per le traduzioni veloci direttamente dalla pagina dei risultati
+			//render dialog for quick translation
+			//l1 language 1 l2 language 2 k name of category v1 1 value of attribute v2 2 value of attribute a1 name of attribute
+			var dl=gid('dialog-translation')
+			dl.style.display="block";
+			dl.innerHTML='<button onclick="this.parentElement.style.display=`none`" id="closeTranslate">Close</button><br/>';
+			var data1=ies.guid();
+	var data2=ies.guid();
+	var onmouseover='this.previousElementSibling.classList.add(`active`)';
+	var onmouseleave='this.previousElementSibling.classList.remove(`active`)';
+	var onclick='dlt(`'+l1+'`,`'+k+'`,gid(`'+data1+'`).getAttribute(`data-ies-old`));send(`'+l1+'`,`'+k+'`,gid(`'+data2+'`).value,gid(`'+data1+'`).value);this.classList.remove(`edited-save`);show_modal(\'Saved!\',\'success\');gid(\'closeTranslate\').click();';
+	ies.ins(dl,'h2',false,l1+'/'+k);
+	ies.ins(dl,'textarea',['class','attribute-editor','id',data1,'data-ies-old',a1,'child',data2,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.nextElementSibling.classList.add(`edited-save`)'],a1);
+	ies.ins(dl,'button',['class','save-editor all-save','id-ies',data1,'data-sibling',data2,'onclick',onclick,'onmousover',onmouseover,'onmouseleave',onmouseleave],'SAVE');
+	ies.ins(dl,'textarea',['class','value-editor','id',data2,'data-ies-old',a1,'parent',data1,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.previousElementSibling.classList.add(`edited-save`)'],v1);
+	//ies.ins(dl,'button',['class','save-editor','id-ies',data2,'data-sibling',data1,'onclick','dlt(`'+l1+'`,`'+k+'`,gid(`'+data1+'`).getAttribute(`data-ies-old`));send(`'+l1+'`,`'+k+'`,gid(`'+data2+'`).value,gid(`'+data1+'`).value)','onmousover','this.previousElementSibling.classList.add(`active`)','onmouseleave','this.previousElementSibling.classList.remove(`active`)'],'SAVE');
+	ies.ins(dl,'br',false,false);
+	ies.ins(dl,'br',false,false);
+	ies.ins(dl,'br',false,false);
+	ies.ins(dl,'br',false,false);
+	if(l1=='ch'){var l11='zh'}else{var l11=l1}
+	ies.ins(dl,'a',['class','googletranslate','target','popup','href','https://translate.google.it/?hl='+l1+'#'+l2+'/'+l11+'/'+encodeURIComponent(v1)+'','style','display:inline-block;margin-right:10px'],'Vai a Google Translate<i class="material-icons" style="vertical-align:middle;color:white !important">g_translate</i>');
+	//ies.ins(dl,'div',['id','google_translate_element']);
+	//ies.ins(dl,'button',['onclick','googleTranslateElementInit(`http://translate.yandex.net/api/v1.5/tr.json/translate?lang='+l2+'-'+l11+'&key= HTTP/1.1`,'+l11+'\')'],'Prova traduzione diretta');
+var ihtml='<select style="display:inline-block" name="to" id="lang"><option value="en">English</option><option value="es">Spanish</option><option value="it" selected="selected">Italian</option><option value="de">German</option><option value="ru">Russian</option><option value="fr">French</option><option value="zh">Chinese</option></select><button id="translate" onclick="tryTranslation(\''+l2+'\',gid(\'lang\').value,`'+data2+'`);gid(\'button-use-translation\').style.display=\'block\'">Traduzione automatica con Yandex</button></div><div id="output" class="bx"></div>';
+	
+	ies.ins(dl,'div',['style','display:inline-block'],ihtml);
+	ies.ins(dl,'button',['onclick','setTranslation(`'+data2+'`,`'+data1+'`)','style','display:none','id','button-use-translation'],'Usa questa traduzione');
+	
+	
+	ies.ins(dl,'br',false,false);
+	ies.ins(dl,'h2',false,l2+'/'+k);
+	gid('lang').value=l11;
+	data1=ies.guid();
+	data2=ies.guid();
+	ies.ins(dl,'textarea',['class','attribute-editor','id',data1,'data-ies-old',a1,'child',data2,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.nextElementSibling.classList.add(`edited-save`)'],a1);
+	onclick='dlt(`'+l2+'`,`'+k+'`,gid(`'+data1+'`).getAttribute(`data-ies-old`));send(`'+l2+'`,gid(`parent`).value,gid(`'+data2+'`).value,gid(`'+data1+'`).value,true);this.classList.remove(`edited-save`)';
+	ies.ins(dl,'button',['class','save-editor all-save','id-ies',data1,'data-sibling',data2,'onclick',onclick,'onmousover',onmouseover,'onmouseleave',onmouseleave],'SAVE');
+	ies.ins(dl,'textarea',['class','value-editor','id',data2,'data-ies-old',a1,'parent',data1,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.previousElementSibling.classList.add(`edited-save`)'],v2);
+	//ies.ins(dl,'button',['class','save-editor','id-ies',data2,'data-sibling',data1,'onclick','dlt(`'+l2+'`,`'+k+'`,gid(`'+data1+'`).getAttribute(`data-ies-old`));send(`'+l2+'`,`'+k+'`,gid(`'+data2+'`).value,gid(`'+data1+'`).value)','onmousover','this.previousElementSibling.classList.add(`active`)','onmouseleave','this.previousElementSibling.classList.remove(`active`)'],'SAVE');
+	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//SUPERBUTTONS//SUPERBUTTONS//SUPERBUTTONS//SUPERBUTTONS//SUPERBUTTONS//SUPERBUTTONS//SUPERBUTTONS//SUPERBUTTONS//SUPERBUTTONS//SUPERBUTTONS//SUPERBUTTONS//SUPERBUTTONS//SUPERBUTTONS//////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		function saveAll(){//Funzione di salvataggio di tutti i campi in editor
+		//gid('dialog-saving').innerHTML='<button onclick="this.parentElement.style.display=`none`">Close</button><br/>';
+			//gid('dialog-saving').style.display='block';
+			var se=document.getElementsByClassName('edited-save');
+			for(var i=0;i<se.length;i++){
+				window.editedInt=setInterval(function(){se[0].click();if(!se[0]){show_modal('Saved! Reloading...','success');setTimeout(function(){location.reload()},2000)}},100);
+			}
+		}
+		function createAllMissingCategories(){//Funzione di salvataggio di tutte le categorie mancanti
+			//var mc=document.getElementsByClassName('missing-category');
+			//for(var i=0;i<mc.length;i++){
+			//	var data=mc[i].getAttribute('data-ies');
+			//	data=JSON.parse(data);
+			//	createParent(data.cat,true,_json);send(data.lang,data.cat,data.defa,data.defv,false,_json);
+			//	mc[i].parentElement.parentElement.removeChild(mc[i].parentElement);
+			//}
+			var mc=document.getElementsByClassName('missing-category');
+			//var myArr=[];
+			var count=mc.length;
+			window.catInt=setInterval(function(){mc[0].click();if(!mc[0]){show_modal('Categories created! Reloading...','success');setTimeout(function(){location.reload()},2000)}},100);
+		}
+		function createAllMissingAttributes(){//Funzione di salvataggio di tutti gli attributi mancanti
+			var ma=document.getElementsByClassName('missing-attribute');
+			//var myArr=[];
+			var count=ma.length;
+			window.attInt=setInterval(function(){ma[0].click();if(!ma[0]){show_modal('Keys created! Reloading...','success');setTimeout(function(){location.reload()},2000)}},100);
+			//for(var ii=0;ii<myArr.length;ii++){
+				
+				//setTimeout(ma[i].click(),300);
+			//}
+		}
+			//var data=ma[c].getAttribute('data-ies');
+				//data=JSON.parse(data);
+				//createParent(data.cat,true);
+				//send(data.lang,data.cat,data.defv,data.defa);
+				//ma[c].parentElement.parentElement.removeChild(ma[c].parentElement);
+		
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//COMPAREFUNCTIONS//COMPAREFUNCTIONS//COMPAREFUNCTIONS//COMPAREFUNCTIONS//COMPAREFUNCTIONS//COMPAREFUNCTIONS//COMPAREFUNCTIONS//COMPAREFUNCTIONS//COMPAREFUNCTIONS//COMPAREFUNCTIONS////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		function matchLanguages(l1,l2){//check categories, attributes and values matching
+			var tt=gid('to-translate');
+			ies.loading();
+			var mc=gid('missing-category');
+			var ma=gid('missing-attribute');
+			for(var z=0;z<languages.length;z++){
+				if(languages[z]==l1){l1JSON=langJSON[z]}
+				if(languages[z]==l2){l2JSON=langJSON[z]}
+			}
+			mc.innerHTML="No missing categories<button onclick=\"createAllMissingCategories()\" style=\"position:absolute;top:0;right:0\">CREATE ALL MISSING CATEGORIES</button><br/>";
+			ma.innerHTML="No missing keys<br/><button onclick=\"createAllMissingAttributes()\" style=\"position:absolute;top:0;right:0\">CREATE NEXT MISSING KEY</button><br/>";
+			tt.innerHTML="No missing translations<br/>";
+			
+			if(l2==l1){show_modal('le lingue inserite sono uguali, babbo!')}else{
+			_clear(l1);
+				for(var k in l1JSON){var v=l1JSON[k];
+					//k is single category name of first language
+					//v is single category object of first language
+					var check=l2JSON[k]==undefined;
+					if(check==true){ies.loading();
+							//category doesn't exist, show it
+							//console.log('missing category, existing in '+l1+' not existing in '+l2+'. category name: '+k);
+							ies.ins(mc,'label',false,'missing category, existing in <span style="color:red">'+l1+'</span> not existing in <span style="color:red">'+l2+'</span>. category name: <span style="color:#00afff">'+k+'</span><button class="log-button missing-category" data-ies="{&quot;cat&quot;:&quot;'+k+'&quot;,&quot;lang&quot;:&quot;'+l2+'&quot;,&quot;defa&quot;:&quot;root&quot;,&quot;defv&quot;:&quot;init&quot;}" onclick="createParent(`'+k+'`);send(`'+l2+'`,`'+k+'`,`init`,`root`,true);this.parentElement.parentElement.removeChild(this.parentElement)">Create category</button><br/>')
+							//mc.innerHTML+=;
+						}else{
+							for(var att in l1JSON[k]){
+								//att is attribute name in category k for the first language
+								var check=l2JSON[k][att]==undefined;
+								if(check==true){
+								var escl1=l1JSON[k][att].replace(/"/g, '&quot;');
+								//escl1=escl1.replace(/'/g, "&#x27;");
+									var onclick='send(`'+l2+'`,`'+k+'`,`'+escl1+'`,`'+att+'`,true);this.parentElement.parentElement.removeChild(this.parentElement)';
+									
+									var dataies='{&quot;cat&quot;:&quot;'+k+'&quot;,&quot;lang&quot;:&quot;'+l2+'&quot;,&quot;defa&quot;:&quot;'+att+'&quot;,&quot;defv&quot;:&quot;'+escl1+'&quot;}'
+									ies.ins(ma,'label',false,'missing attribute, existing in <span style="color:red">'+l1+'/'+k+'</span> not existing in <span style="color:red">'+l2+'/'+k+'</span>. attribute name: <span style="color:#00afff">'+att+'</span><button class="log-button missing-attribute" data-ies="'+dataies+'" onclick="'+onclick+'">Create attribute</button><br/>')
+								}else{
+									//existing
+									if(l2JSON[k][att]==l1JSON[k][att]){
+									var escl2=l2JSON[k][att].replace(/"/g, '&quot;');
+									//escl2=escl2.replace(/'/g, "&#x27;");
+									ies.ins(tt,'label',false,' you probably need to translate <span style="color:#00afff" class="toolong">'+escl2+'</span> in <span style="color:red;width:150px;">'+l2+'/'+k+'</span><button class="log-button" onclick="renderTranslationDialog(`'+l2+'`,`'+l1+'`,`'+k+'`,`'+escl2+'`,`'+escl2+'`,`'+att+'`)">Open translation dialog</button><br/>')
+									};
+								}
+							}
+						}
+					}
+				}
+				//updateJSON();renderEditor();
+			}
+			function filterMatchResults(e){//Funzione di filtro dei risultati
+			var v=e.value;
+			var rs=document.getElementsByClassName('matchresult');
+			for(var i=0;i<rs.length;i++){
+				rs[i].style.display='none';
+				gid(v).style.display='block';
+			}
+		}
+		function invertMatch(){//Funzione di inversione delle select per il confronto
+		var c1=gid('confronta1');
+		var c2=gid('confronta2');
+		c11=c2.value;
+		c22=c1.value;
+		c1.value=c11;
+		c2.value=c22;
+	}
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//RENDERFUNCTIONS//RENDERFUNCTIONS//RENDERFUNCTIONS//RENDERFUNCTIONS//RENDERFUNCTIONS//RENDERFUNCTIONS//RENDERFUNCTIONS//RENDERFUNCTIONS//RENDERFUNCTIONS//RENDERFUNCTIONS//RENDERFUNCTIONS/////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		function renderSelect(){//Rendering della select delle categorie
+		//render of langage select
+		var l = gid('language').value;
+		if(l=='Tutte'){
+			gid('parent').innerHTML='';
+			firebase.database().ref().on('child_added',function(s){var v=s.val();var k=s.key;for (var key in v) {ies.loading();
+			//key is language in database
+			//console.log(l);console.log(k);
+	var p=document.getElementById('parent');
+	var o=document.createElement('option');
+	o.innerHTML=key;
+	p.appendChild(o);
+	
+}})
+		}else{
+		gid('parent').innerHTML='';
+			firebase.database().ref().on('child_added',function(s){var v=s.val();var k=s.key;for (var key in v) {ies.loading();
+			//console.log(l);console.log(k);
+	var p=document.getElementById('parent');
+	if(k==l){
+	var o=document.createElement('option');
+	o.innerHTML=key;
+	p.appendChild(o);
+	}
+}})};
+//gid('language').innerHTML+='<option>Tutte</option>';
+		}
+		function renderEditor(){//Rendering dell'editor degli attributi e dei valori
+		
+		gid('editor-target').innerHTML="<input type=\"button\" class=\"save-all-button\" onclick=\"saveAll('false')\" value=\"SAVE ALL\" style=\"z-index:1000000000\"/><br/>";
+			 var pp = gid('parent').value;
+			var l = gid('language').value;
+			firebase.database().ref(l).on('child_added',function(s){var v=s.val();var k=s.key;ies.loading();
+			for (var key in v) {
+			//console.log(k);
+			if(k==pp){
+	var p=document.getElementById('editor-target');
+	var data1=ies.guid();
+	var data2=ies.guid();
+	var onmouseover='this.previousElementSibling.classList.add(`active`)';
+	var onmouseleave='this.previousElementSibling.classList.remove(`active`)';
+	var onclick='dlt(gid(`language`).value,gid(`parent`).value,gid(`'+data1+'`).getAttribute(`data-ies-old`));send(gid(`language`).value,gid(`parent`).value,gid(`'+data2+'`).value,gid(`'+data1+'`).value,true);this.classList.remove(`edited-save`)'
+	ies.ins(p,'textarea',['class','attribute-editor','id',data1,'data-ies-old',key,'child',data2,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.nextElementSibling.classList.add(`edited-save`)'],key);
+	ies.ins(p,'button',['class','save-editor all-save','id-ies',data1,'data-sibling',data2,'onclick',onclick,'onmousover',onmouseover,'onmouseleave',onmouseleave],'SALVA');
+	ies.ins(p,'textarea',['class','value-editor','id',data2,'data-ies-old',key,'parent',data1,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.previousElementSibling.classList.add(`edited-save`)'],v[key]);
+	var b=ies.ins(p,'button',['class','translate-button'],false)
+	ies.ins(b,'a',['target','_blank','href','https://translate.google.it/#auto/'+l+'/'+encodeURIComponent(v[key])+'','style','display:inline-block;margin-right:10px'],'<i class="material-icons">g_translate</i>');
+	//ies.ins(p,'button',['class','save-editor','id-ies',data2,'data-sibling',data1,'onclick','dlt(gid(`language`).value,gid(`parent`).value,gid(`'+data1+'`).getAttribute(`data-ies-old`));send(gid(`language`).value,gid(`parent`).value,gid(`'+data2+'`).value,gid(`'+data1+'`).value)','onmousover','this.previousElementSibling.classList.add(`active`)','onmouseleave','this.previousElementSibling.classList.remove(`active`)'],'SALVA');
+	var br=document.createElement('br');
+	p.appendChild(br);
+	}
+}})
+		}
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//SENDFUNCTION//SENDFUNCTION//SENDFUNCTION//SENDFUNCTION//SENDFUNCTION//SENDFUNCTION//SENDFUNCTION//SENDFUNCTION//SENDFUNCTION//SENDFUNCTION//SENDFUNCTION//SENDFUNCTION//SENDFUNCTION//////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+        function send(l,p,val,a,log,_json) {//Principale funzione di send, per settare attributi e valori in categoria specificata
+            //var l = gid('language').value;
+            //var p = gid('parent').value;
+            //var a = gid('attribute').value;
+            //var val = gid('valore').value;
+            if (hasWhiteSpace(a)) {
+                //alert('il campo attributo non può avere spazi bianchi')
+				show_modal('il campo attributo non può avere spazi bianchi','error')
+            }
+            else {
+			
+                if (a != '' && val != '') {
+				if(document.getElementsByClassName('newparent')[0]){
+				if(l=="Tutte"){
+				
+				
+				for(var i=0;i<languages.length;i++){
+					_clear(languages[i]);
+					firebase.database().ref(languages[i]).on('child_added',function(s){var v=s.val();var k=s.key;v[p]=val;ies.loading();
+						firebase.database().ref(languages[i]+'/'+p).set({'root':'init'});
+					});
+				
+					firebase.database().ref(languages[i]).on('child_added',function(s){var v=s.val();var k=s.key;v[a]=val;if(k==p){ies.loading();
+						firebase.database().ref(languages[i]+'/'+p).set(v);
+					}});
+					}
+					if(log){show_modal('è stato creato il nuovo parent '+p+' ed è stato aggiunto {'+a+' : '+val+'} ad ogni lingua','success');}else{
+						gid('dialog-saving').innerHTML+='è stato creato il nuovo parent '+p+' ed è stato aggiunto {'+a+' : '+val+'} ad ogni lingua<br/>'
+					}
+					//renderEditor();renderSelect();
+				}else{
+				_clear(l);
+					firebase.database().ref(l).on('child_added',function(s){var v=s.val();var k=s.key;v[p]=val;ies.loading();
+						firebase.database().ref(l+'/'+p).set({'root':'init'});
+					});
+				if(_json){
+				_json=JSON.parse(_json);
+				console.log(_json);
+				
+				_json[p]={'root':'init'};
+					for(var z=0;z<languages.length;z++){
+				//if(languages[z]==l1){l1JSON=langJSON[z]}
+				if(languages[z]==l){langJSON[z]=_json}
+			}
+			
+			}
+					firebase.database().ref(l).on('child_added',function(s){var v=s.val();var k=s.key;v[a]=val;if(k==p){ies.loading();
+						firebase.database().ref(l+'/'+p).set(v);
+					}});
+					if(_json){
+					//_json=JSON.parse(_json);
+					console.log(_json);
+					
+					_json[p][a]=val;
+					for(var z=0;z<languages.length;z++){
+				//if(languages[z]==l1){l1JSON=langJSON[z]}
+				if(languages[z]==l){langJSON[z]=_json}
+			}
+			
+			}
+					
+					if(log){show_modal('è stato creato il nuovo parent '+p+' ed è stato aggiunto {'+a+' : '+val+'} alla lingua '+l,'success');}else{
+						gid('dialog-saving').innerHTML+='è stato creato il nuovo parent '+p+' ed è stato aggiunto {'+a+' : '+val+'} alla lingua '+l+'<br/>';
+					}
+					//renderEditor();renderSelect();
+				}
+				
+				}else{
+				if(l=="Tutte"){
+				for(var i=0;i<languages.length;i++){
+				_clear(languages[i]);
+					firebase.database().ref(languages[i]).on('child_added',function(s){var v=s.val();var k=s.key;v[a]=val;if(k==p){ies.loading();
+						firebase.database().ref(languages[i]+'/'+p).set(v);
+					}});
+			}
+					if(log){show_modal('attributo:'+a+' valore:'+val+' aggiunti a tutte le lingue nel campo '+p,'success');}else{
+						gid('dialog-saving').innerHTML+='attributo:'+a+' valore:'+val+' aggiunti a tutte le lingue nel campo '+p+'<br/>';
+					}
+					//renderEditor();renderSelect();
+				}else{
+				//window.open("http://192.168.1.125:8091/write?init=0&attribute=" + a + "&value=" + v + "&parent=" + p + "&lang=" + l,'_blank');
+                    //window.location.href = "http://192.168.1.125:8091/write?init=0&attribute=" + a + "&value=" + v + "&parent=" + p + "&lang=" + l;
+					_clear(l);
+					firebase.database().ref(l).on('child_added',function(s){var v=s.val();var k=s.key;v[a]=val;if(k==p){ies.loading();
+						firebase.database().ref(l+'/'+p).set(v);
+					}});
+					if(log){show_modal('attributo:'+a+' valore:'+val+' aggiunto alla lingua '+l,'success');}else{
+						gid('dialog-saving').innerHTML+='attributo:'+a+' valore:'+val+' aggiunto alla lingua '+l+'<br/>';
+					}
+					//renderEditor();renderSelect();
+                }
+				
+				
+				
+				
+                }}else {
+                    show_modal('inserisci un attributo e un valore','error')
+                }
+            };
+        }
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE ///////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		function dlt(l,p,a,log){//Funzione di rimozione di attributi in categoria specificata
+			//var l = gid('language').value;
+            //var p = gid('parent').value;
+            //var a = gid('dlt').value;
+			if (hasWhiteSpace(a)) {
+                show_modal('il campo attributo da rimuovere non può avere spazi bianchi','error');
+            }else {
+                if (a != '') {
+				if(l=="Tutte"){
+				for(var i=0;i<languages.length;i++){
+				_clear(languages[i]);
+					firebase.database().ref(languages[i]).on('child_added',function(s){var v=s.val();var k=s.key;firebase.database().ref(languages[i]+'/'+k+'/'+a).remove();ies.loading();});
+					}
+					if(log){show_modal('attributo:'+a+' rimosso da '+p+' in tutte le lingue','success');}
+					//renderEditor();renderSelect();
+				}else{
+				//window.open("http://192.168.1.125:8091/write?init=0&attribute=" + a + "&value=" + v + "&parent=" + p + "&lang=" + l,'_blank');
+                    //window.location.href = "http://192.168.1.125:8091/write?init=0&attribute=" + a + "&value=" + v + "&parent=" + p + "&lang=" + l;
+					_clear(l);
+					firebase.database().ref(l).on('child_added',function(s){var v=s.val();var k=s.key;v[a]='';firebase.database().ref(l+'/'+k+'/'+a).remove();ies.loading();})
+					if(log){show_modal('attributo:'+a+' rimosso da '+p+' dalla lingua '+l,'success');}
+					//renderEditor();renderSelect();
+                }}
+                else {
+                    show_modal('inserisci un attributo da rimuovere','error')
+                }
+            };
+		}
+		function dltCat(l,cat,log){
+		if (hasWhiteSpace(l)){show_modal('Categoria :'+cat+' non rimossa dalla lingua '+l+', errore sconosciuto','error')}else{
+		firebase.database().ref(l+'/'+cat).set({});
+		if(log){show_modal('Categoria :'+cat+' rimossa dalla lingua '+l,'success');location.reload();}
+		}}
+		function dltLang(l,log){
+			if (hasWhiteSpace(l)){show_modal('Lingua '+l+' non rimossa, errore sconosciuto','error');
+			}else{firebase.database().ref(l).set({});
+			if(log){show_modal('Lingua '+l+' rimossa con successo','success');location.reload();}
+			}
+		}
+		
+		document.getElementById('import').onclick = function() {
+		var files = document.getElementById('selectFiles').files;
+		console.log(files);
+		if (files.length <= 0) {
+		return false;
+	}
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//IMPORT JSON IMPORT JSON IMPORT JSON IMPORT JSON IMPORT JSON IMPORT JSON IMPORT JSON IMPORT JSON IMPORT JSON IMPORT JSON IMPORT JSON IMPORT JSON IMPORT JSON IMPORT JSON IMPORT JSON //////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	var fr = new FileReader();
+  
+		fr.onload = function(e) { 
+			console.log(e);var l=gid('language').value;
+			var r = confirm("Stai caricando un file JSON alla lingua "+l+". SOVRASCRIVERA' i dati precedenti. Sei sicuro di voler continuare? Se non sei sicuro, effettua prima un backup scaricando la lingua selezionata con il suo bottone di download, altrimenti l'azione non potrà essere ripristinata.");
+			if (r == true) {
+				window.result = JSON.parse(e.target.result);
+				var formatted = JSON.stringify(result, null, 2);
+				document.getElementById('result').value = formatted;
+				firebase.database().ref(l).set(result);
+				show_modal('File JSON importato con successo alla lingua '+l+'. Reloading....','success');
+				setTimeout(function(){location.reload()},2000);
+			} else {
+				show_modal('OPERAZIONE ANNULLATA','error');
+			}
+			
+		}
+  
+  fr.readAsText(files.item(0));
+};
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//UTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILSUTILS///////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        function hasWhiteSpace(s) {//Utilità per il check di spazi bianchi
+            return s.indexOf(' ') >= 0;
+        }
+				function getRandomColor() {
+    var letters = '3456789AB';
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 8)];
+    }
+    return color;
+}
+        function createParent(np,log){//Funzione di creazione di nuove categorie
+            //var np=gid('newparent').value;
+            if(np==''||hasWhiteSpace(np)){
+                show_modal('il parent non può essere vuoto o non può contenere spazi bianchi','error')
+            }else{
+                var p=gid('parent');ies.loading();
+				ies.ins(p,'option',['class','newparent'],np)
+                //var opt=document.createElement('option');
+				//opt.setAttribute('class','newparent');
+                //opt.innerHTML=np;
+                //p.appendChild(opt);
+                p.value=np;
+				if(log){show_modal('Creata nuova categoria '+np,'success')}
+            }
+		
+        }
+		listenResize();//Listening per il resize dei boxes sulla destra
+		
+var url = "https://translate.yandex.net/api/v1.5/tr.json/translate",
+    keyAPI = "trnsl.1.1.20170303T215707Z.31bbd841bc20f1b3.de54f27eb0b7271c3037015f8549ea414ed21c7a";
+
+function tryTranslation(lang1,lang2,id){
+
+    var xhr = new XMLHttpRequest(),
+        textAPI = gid(id).value,
+        //langAPI = document.querySelector('#lang').value
+        data = "key="+keyAPI+"&text="+textAPI+"&lang="+lang1+'-'+lang2;
+    xhr.open("POST",url,true);
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhr.send(data);
+    xhr.onreadystatechange = function() {
+        if (this.readyState==4 && this.status==200) {
+            var res = this.responseText;
+            //document.querySelector('#json').innerHTML = res;
+            var json = JSON.parse(res);
+            if(json.code == 200) {
+                document.querySelector('#output').innerHTML = json.text[0];
+            }
+            else {
+                document.querySelector('#output').innerHTML = "Error Code: " + json.code;
+            }
+        }
+    }
+
+}
+function setTranslation(id,button){
+	button=gatt('id-ies',button,'button')[0];
+		var v=gid('output').innerHTML;
+		var t=gid(id);
+		t.innerHTML=v;
+		button.classList.add('edited-save');
+	}
+	function show_modal(str,status){
+	
+	//str=encodeHTML(str);
+		var mod=gid('modal');
+		if(status=='error'){mod.setAttribute('style','background-color:'+errorColor+'')}else if(status=='success'){mod.setAttribute('style','background-color:'+successColor+'')}else{mod.setAttribute('style','background-color:'+defaultColor+'')}
+		mod.style.opacity='1';
+		mod.innerHTML=str;
+		setTimeout("gid('modal').style.opacity='0';",2500)
+	}
+	function encodeHTML(str){
+ var aStr = str.split(''),
+     i = aStr.length,
+     aRet = [];
+
+   while (--i) {
+    var iC = aStr[i].charCodeAt();
+    if (iC < 65 || iC > 127 || (iC>90 && iC<97)) {
+      aRet.push('&#'+iC+';');
+    } else {
+      aRet.push(aStr[i]);
+    }
+  }
+ return aRet.reverse().join('');
+}
+</script>
+    </script>
+</body>
+</html>
