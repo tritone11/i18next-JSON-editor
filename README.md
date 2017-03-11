@@ -3,7 +3,9 @@ This tool let upload, edit, download your language files of i18next for translat
   
 [WORKING DEMO](http://cerati.org/i18next-JSON-editor/)  
 
-You can only read, every write option is not allowed in the demo to prevent troll edit
+You can only read, every write option is not allowed in the demo to prevent troll edit  
+  
+ <[...] data-i18n="category.key">value</ [...]
  
   
 ## Features  
