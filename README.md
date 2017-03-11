@@ -1,7 +1,7 @@
 # ies18n - extended tool to edit your i18next JSON files
 This tool let upload, edit, download your language files of i18next for translation.  
   
-[WORKING DEMO](http://cerati.org/ies18n/)  
+[WORKING DEMO](http://cerati.org/i18next-JSON-editor/)  
 
 You can only read, every write option is not allowed in the demo to prevent troll edit
  
@@ -80,7 +80,7 @@ Note that in order to work, the quick Google Translate suggestion needs that you
 Open your index.html on your website, your Firebase hosting or a software like hfs and you can start creating your language files or editing the ones you already have.  
 Clicking on the logo make a full backup that you can import anytime in the Firebase Console  
   
-[WORKING DEMO](http://cerati.org/ies18n/)  
+[WORKING DEMO](http://cerati.org/i18next-JSON-editor/)  
 
 You can only read, every write option is not allowed in the demo to prevent troll edit
   
