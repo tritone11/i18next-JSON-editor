@@ -826,9 +826,9 @@ button:hover,input[type="button"]{
 	var onmouseleave='this.previousElementSibling.classList.remove(`active`)';
 	var onclick='dlt(`'+l1+'`,`'+k+'`,gid(`'+data1+'`).getAttribute(`data-ies-old`));send(`'+l1+'`,`'+k+'`,gid(`'+data2+'`).value,gid(`'+data1+'`).value);this.classList.remove(`edited-save`);show_modal(\'Saved!\',\'success\');gid(\'closeTranslate\').click();';
 	ies.ins(dl,'h2',false,l1+'/'+k);
-	ies.ins(dl,'textarea',['class','attribute-editor','id',data1,'data-ies-old',a1,'child',data2,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.nextElementSibling.classList.add(`edited-save`)'],a1);
+	ies.ins(dl,'textarea',['class','attribute-editor','id',data1,'data-ies-old',a1,'child',data2,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.nextElementSibling.classList.add(`edited-save`)','onkeyup','this.nextElementSibling.classList.add(`edited-save`)'],a1);
 	ies.ins(dl,'button',['class','save-editor all-save','id-ies',data1,'data-sibling',data2,'onclick',onclick,'onmousover',onmouseover,'onmouseleave',onmouseleave],'SAVE');
-	ies.ins(dl,'textarea',['class','value-editor','id',data2,'data-ies-old',a1,'parent',data1,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.previousElementSibling.classList.add(`edited-save`)'],v1);
+	ies.ins(dl,'textarea',['class','value-editor','id',data2,'data-ies-old',a1,'parent',data1,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.previousElementSibling.classList.add(`edited-save`)','onkeyup','this.previousElementSibling.classList.add(`edited-save`)'],v1);
 	//ies.ins(dl,'button',['class','save-editor','id-ies',data2,'data-sibling',data1,'onclick','dlt(`'+l1+'`,`'+k+'`,gid(`'+data1+'`).getAttribute(`data-ies-old`));send(`'+l1+'`,`'+k+'`,gid(`'+data2+'`).value,gid(`'+data1+'`).value)','onmousover','this.previousElementSibling.classList.add(`active`)','onmouseleave','this.previousElementSibling.classList.remove(`active`)'],'SAVE');
 	ies.ins(dl,'br',false,false);
 	ies.ins(dl,'br',false,false);
@@ -849,10 +849,10 @@ var ihtml='<select style="display:inline-block" name="to" id="lang"><option valu
 	gid('lang').value=l11;
 	data1=ies.guid();
 	data2=ies.guid();
-	ies.ins(dl,'textarea',['class','attribute-editor','id',data1,'data-ies-old',a1,'child',data2,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.nextElementSibling.classList.add(`edited-save`)'],a1);
+	ies.ins(dl,'textarea',['class','attribute-editor','id',data1,'data-ies-old',a1,'child',data2,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.nextElementSibling.classList.add(`edited-save`)','onkeyup','this.nextElementSibling.classList.add(`edited-save`)'],a1);
 	onclick='dlt(`'+l2+'`,`'+k+'`,gid(`'+data1+'`).getAttribute(`data-ies-old`));send(`'+l2+'`,gid(`parent`).value,gid(`'+data2+'`).value,gid(`'+data1+'`).value,true);this.classList.remove(`edited-save`)';
 	ies.ins(dl,'button',['class','save-editor all-save','id-ies',data1,'data-sibling',data2,'onclick',onclick,'onmousover',onmouseover,'onmouseleave',onmouseleave],'SAVE');
-	ies.ins(dl,'textarea',['class','value-editor','id',data2,'data-ies-old',a1,'parent',data1,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.previousElementSibling.classList.add(`edited-save`)'],v2);
+	ies.ins(dl,'textarea',['class','value-editor','id',data2,'data-ies-old',a1,'parent',data1,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.previousElementSibling.classList.add(`edited-save`)','onkeyup','this.previousElementSibling.classList.add(`edited-save`)'],v2);
 	//ies.ins(dl,'button',['class','save-editor','id-ies',data2,'data-sibling',data1,'onclick','dlt(`'+l2+'`,`'+k+'`,gid(`'+data1+'`).getAttribute(`data-ies-old`));send(`'+l2+'`,`'+k+'`,gid(`'+data2+'`).value,gid(`'+data1+'`).value)','onmousover','this.previousElementSibling.classList.add(`active`)','onmouseleave','this.previousElementSibling.classList.remove(`active`)'],'SAVE');
 	}
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1014,9 +1014,9 @@ var ihtml='<select style="display:inline-block" name="to" id="lang"><option valu
 	var onmouseover='this.previousElementSibling.classList.add(`active`)';
 	var onmouseleave='this.previousElementSibling.classList.remove(`active`)';
 	var onclick='dlt(gid(`language`).value,gid(`parent`).value,gid(`'+data1+'`).getAttribute(`data-ies-old`));send(gid(`language`).value,gid(`parent`).value,gid(`'+data2+'`).value,gid(`'+data1+'`).value,true);this.classList.remove(`edited-save`)'
-	ies.ins(p,'textarea',['class','attribute-editor','id',data1,'data-ies-old',key,'child',data2,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.nextElementSibling.classList.add(`edited-save`)'],key);
+	ies.ins(p,'textarea',['class','attribute-editor','id',data1,'data-ies-old',key,'child',data2,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.nextElementSibling.classList.add(`edited-save`)','onkeyup','this.nextElementSibling.classList.add(`edited-save`)'],key);
 	ies.ins(p,'button',['class','save-editor all-save','id-ies',data1,'data-sibling',data2,'onclick',onclick,'onmousover',onmouseover,'onmouseleave',onmouseleave],'SAVE');
-	ies.ins(p,'textarea',['class','value-editor','id',data2,'data-ies-old',key,'parent',data1,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.previousElementSibling.classList.add(`edited-save`)'],v[key]);
+	ies.ins(p,'textarea',['class','value-editor','id',data2,'data-ies-old',key,'parent',data1,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.previousElementSibling.classList.add(`edited-save`)','onkeyup','this.previousElementSibling.classList.add(`edited-save`)'],v[key]);
 	var b=ies.ins(p,'button',['class','translate-button'],false)
 	ies.ins(b,'a',['target','_blank','href','https://translate.google.it/#auto/'+l+'/'+encodeURIComponent(v[key])+'','style','display:inline-block;margin-right:10px'],'<i class="material-icons">g_translate</i>');
 	//ies.ins(p,'button',['class','save-editor','id-ies',data2,'data-sibling',data1,'onclick','dlt(gid(`language`).value,gid(`parent`).value,gid(`'+data1+'`).getAttribute(`data-ies-old`));send(gid(`language`).value,gid(`parent`).value,gid(`'+data2+'`).value,gid(`'+data1+'`).value)','onmousover','this.previousElementSibling.classList.add(`active`)','onmouseleave','this.previousElementSibling.classList.remove(`active`)'],'SAVE');
