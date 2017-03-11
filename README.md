@@ -5,7 +5,7 @@ This tool let upload, edit, download your language files of i18next for translat
 
 You can only read, every write option is not allowed in the demo to prevent troll edit  
   
- <[...] data-i18n="category.key">value</ [...]
+ <[...] data-i18n="category.key">value</ [...]>
  
   
 ## Features  
