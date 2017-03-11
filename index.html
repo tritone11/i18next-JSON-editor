@@ -51,14 +51,98 @@ window.updateJSON=function(){
 }
 </script>
 <style>
+    :root{
+    --main-color:#e9e9e9;
+    --header-color:#271b68;
+    --second-color:#e9e9e9;
+    --second-color-text:#000000;
+    --third-color:#ffffff;
+        --third-color-text:#000000;
+    --buttons-color:#292b2c;
+    --semi-color:rgba(11, 11, 11, 0.1);
+}
 *{
 	font-family:monospace;
 }
 body{
 	
 	margin:0;
-	background:#292b2c;
+	background:var(--main-color);
 	color:white;
+}
+    header{
+	    height: 59px;
+    width: 100%;
+    z-index: 5;
+    position: relative;
+    background-color: var(--header-color);
+    border-bottom: 1px solid #000000;
+    box-shadow: 1.4px 2.7px 8px 0 rgb(16, 18, 36);
+}
+    #main-config{
+	    height: 100px;
+    z-index: 4;
+    /* background-color: rgba(252, 190, 167,1); */
+    padding: 20px;
+    background:var(--third-color);
+    color:var(--third-color-text);
+    box-shadow: 1.4px 2.7px 8px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+#main-create{
+	
+    color: var(--second-color-text);
+    padding: 20px;
+    background:var(--second-color);
+    z-index: 3;
+    position: relative;
+    box-shadow: 1.4px 2.7px 8px 0 rgba(0, 0, 0, 0.2);
+}
+#main-config input[type="text"],#main-delete input[type="text"]{
+    border: none;
+    padding: 7px;
+    background-color: var(--semi-color);
+    color: #2E86AB;
+}
+#main-delete{
+	    min-height: 100px;
+    z-index: 2;
+    background-color: rgba(252, 190, 167,0.4);
+    padding: 20px;
+    min-height: 100px;
+    /* z-index: 1; */
+     background: var(--third-color);
+    color: var(--third-color-text);
+    box-shadow: 1.4px 2.7px 8px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+#main-import{
+	    min-height: 100px;
+    z-index: 0;
+    background-color: rgba(252, 190, 167,0.4);
+    padding: 20px;
+    min-height: 100px;
+     background:var(--third-color);
+    color: var(--third-color-text);
+    box-shadow: 1.4px 2.7px 8px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+#main-confronta{
+	min-height: 100px;
+    z-index: 1;
+        background:var(--second-color);
+		color:var(--second-color-text);
+    padding: 20px;
+    box-shadow: 1.4px 2.7px 8px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+#matchresultloading{
+margin-top: 8px;
+    margin-left: 14px;
+    border-radius: 200px;
+    height: 46px;
+    transition: all 200ms ease;
+    transform: rotate(0deg);
 }
 .material-icons {
   font-family: 'Material Icons';
@@ -292,7 +376,7 @@ button ,input[type="button"]{
     padding: 8px;
     border-radius: 3px;
     margin: 10px 5px 10px 5px;
-    background-color: #843aca;
+    background-color: var(--header-color);
 }
 input[type="text"] {
     border: 2px solid #2E86AB;
@@ -325,11 +409,10 @@ button:active{
     min-width: 80px;
     overflow: hidden;
     /* height: 20px; */
-    background-color: rgba(11, 11, 11, 0.27);
     vertical-align: middle;
     display: inline-block;
-    color: white;
-    background: rgba(0, 0, 0, 0.29) url(arrowdown.png) no-repeat 100% 50%;
+    color: #333;
+    background: var(--semi-color) url(arrowdown.png) no-repeat 100% 50%;
 }
 
 .select-style select {
@@ -340,7 +423,7 @@ button:active{
     box-shadow: none;
     font-weight: bold;
     background-color: transparent;
-    color: #ffffff;
+    color: #333;
     background-image: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -350,80 +433,8 @@ button:active{
 .select-style select:focus {
     outline: none;
 }
-header{
-	    height: 59px;
-    width: 100%;
-    z-index: 5;
-    position: relative;
-    background-color: #271b68;
-    border-bottom: 1px solid #000000;
-    box-shadow: 1.4px 2.7px 8px 0 rgb(16, 18, 36);
-}
-#main-config{
-	    height: 100px;
-    z-index: 4;
-    /* background-color: rgba(252, 190, 167,1); */
-    padding: 20px;
-    background:#474ebd;
-    color: white;
-    box-shadow: 1.4px 2.7px 8px 0 rgba(0, 0, 0, 0.2);
-    position: relative;
-}
-#main-create{
-	
-    color: white;
-    padding: 20px;
-    background:#479c96;
-    z-index: 3;
-    position: relative;
-    box-shadow: 1.4px 2.7px 8px 0 rgba(0, 0, 0, 0.2);
-}
-#main-config input[type="text"],#main-delete input[type="text"]{
-    border: none;
-    padding: 7px;
-    background-color: #2c2571;
-    color: #2E86AB;
-}
-#main-delete{
-	    min-height: 100px;
-    z-index: 2;
-    background-color: rgba(252, 190, 167,0.4);
-    padding: 20px;
-    min-height: 100px;
-    /* z-index: 1; */
-     background: #474ebd;
-    color: #ffffff;
-    box-shadow: 1.4px 2.7px 8px 0 rgba(0, 0, 0, 0.2);
-    position: relative;
-}
-#main-import{
-	    min-height: 100px;
-    z-index: 0;
-    background-color: rgba(252, 190, 167,0.4);
-    padding: 20px;
-    min-height: 100px;
-     background:#474ebd;
-    color: #ffffff;
-    box-shadow: 1.4px 2.7px 8px 0 rgba(0, 0, 0, 0.2);
-    position: relative;
-}
-#main-confronta{
-	min-height: 100px;
-    z-index: 1;
-        background:#479c96;
-		color:white;
-    padding: 20px;
-    box-shadow: 1.4px 2.7px 8px 0 rgba(0, 0, 0, 0.2);
-    position: relative;
-}
-#matchresultloading{
-margin-top: 8px;
-    margin-left: 14px;
-    border-radius: 200px;
-    height: 46px;
-    transition: all 200ms ease;
-    transform: rotate(0deg);
-}
+
+
 .send{
 margin-top: 0px !important;
     vertical-align: top;
@@ -469,8 +480,8 @@ option {
     color: white;
 }
 textarea#valore, #attribute {
-    background-color: rgba(0, 0, 0, 0.36);
-    color: white;
+    background-color:#ffffff;
+    color: #000000;
     border: none;
     border-radius: 5px;
 }
@@ -554,16 +565,16 @@ button:hover,input[type="button"]{
             <br/>
             <span style="width:150px;display:inline-block">Select category</span>
             <div class="select-style">
-                <select id="parent" onchange="renderEditor()">
+                <select id="parent" onchange="renderEditor();gid('categorytexttarget').innerHTML=this.value" onkeyup="gid('categorytexttarget').innerHTML=this.value">
 
                 </select>
             </div>
         </div>
     </div>
     <div id="main-create">
-        <h3>Create a new {"category" : {"Key":"Value"}}</h3>
-        <textarea placeholder="Key" id="attribute"></textarea>
-        <textarea placeholder="Value" id="valore"></textarea>
+        <h3>Create {"<span id="keytexttarget"></span>":"<span id="valuetexttarget"></span>"} in <span id="categorytexttarget">selected category</span></h3>
+        <textarea placeholder="Key" id="attribute" onchange="gid('keytexttarget').innerHTML=this.value" onkeyup="gid('keytexttarget').innerHTML=this.value"></textarea>
+        <textarea placeholder="Value" id="valore" onchange="gid('valuetexttarget').innerHTML=this.value" onkeyup="gid('valuetexttarget').innerHTML=this.value"></textarea>
         <input type="button" onclick="send(gid('language').value,gid('parent').value,gid('valore').value,gid('attribute').value,true)" class="send" value="WRITE KEY"> </div>
     <div id="main-delete">
         <h3>Delete keys / categories / languages</h3>
@@ -603,7 +614,7 @@ button:hover,input[type="button"]{
     </div>
 	<div id="main-import">
 	<h3>Import custom JSON file in the selected language</h3>
-<input type="file" id="selectFiles" value="Import" style="    background-color: #2c2672;
+<input type="file" id="selectFiles" value="Import" style="    background-color: rgba(11, 11, 11, 0.1);;
     padding: 20px;"/><br />
 <button id="import">Import</button>
 <textarea id="result" style="display:none">
@@ -733,13 +744,13 @@ button:hover,input[type="button"]{
 	ies.ins(dl,'br',false,false);
 	ies.ins(dl,'br',false,false);
 	if(l1=='ch'){var l11='zh'}else{var l11=l1}
-	ies.ins(dl,'a',['class','googletranslate','target','popup','href','https://translate.google.it/?hl='+l1+'#'+l2+'/'+l11+'/'+encodeURIComponent(v1)+'','style','display:inline-block;margin-right:10px'],'Vai a Google Translate<i class="material-icons" style="vertical-align:middle;color:white !important">g_translate</i>');
+	ies.ins(dl,'a',['class','googletranslate','target','popup','href','https://translate.google.it/?hl='+l1+'#'+l2+'/'+l11+'/'+encodeURIComponent(v1)+'','style','display:inline-block;margin-right:10px'],'Go to Google Translate<i class="material-icons" style="vertical-align:middle;color:white !important">g_translate</i>');
 	//ies.ins(dl,'div',['id','google_translate_element']);
 	//ies.ins(dl,'button',['onclick','googleTranslateElementInit(`http://translate.yandex.net/api/v1.5/tr.json/translate?lang='+l2+'-'+l11+'&key= HTTP/1.1`,'+l11+'\')'],'Prova traduzione diretta');
-var ihtml='<select style="display:inline-block" name="to" id="lang"><option value="en">English</option><option value="es">Spanish</option><option value="it" selected="selected">Italian</option><option value="de">German</option><option value="ru">Russian</option><option value="fr">French</option><option value="zh">Chinese</option></select><button id="translate" onclick="tryTranslation(\''+l2+'\',gid(\'lang\').value,`'+data2+'`);gid(\'button-use-translation\').style.display=\'block\'">Traduzione automatica con Yandex</button></div><div id="output" class="bx"></div>';
+var ihtml='<select style="display:inline-block" name="to" id="lang"><option value="en">English</option><option value="es">Spanish</option><option value="it" selected="selected">Italian</option><option value="de">German</option><option value="ru">Russian</option><option value="fr">French</option><option value="zh">Chinese</option></select><button id="translate" onclick="tryTranslation(\''+l2+'\',gid(\'lang\').value,`'+data2+'`);gid(\'button-use-translation\').style.display=\'block\'">Yandex automatic translation</button></div><div id="output" class="bx"></div>';
 	
 	ies.ins(dl,'div',['style','display:inline-block'],ihtml);
-	ies.ins(dl,'button',['onclick','setTranslation(`'+data2+'`,`'+data1+'`)','style','display:none','id','button-use-translation'],'Usa questa traduzione');
+	ies.ins(dl,'button',['onclick','setTranslation(`'+data2+'`,`'+data1+'`)','style','display:none','id','button-use-translation'],'Use this translation');
 	
 	
 	ies.ins(dl,'br',false,false);
@@ -810,7 +821,7 @@ var ihtml='<select style="display:inline-block" name="to" id="lang"><option valu
 				if(languages[z]==l2){l2JSON=langJSON[z]}
 			}
 			mc.innerHTML="No missing categories<button onclick=\"createAllMissingCategories()\" style=\"position:absolute;top:0;right:0\">CREATE ALL MISSING CATEGORIES</button><br/>";
-			ma.innerHTML="No missing keys<br/><button onclick=\"createAllMissingAttributes()\" style=\"position:absolute;top:0;right:0\">CREATE NEXT MISSING KEY</button><br/>";
+			ma.innerHTML="No missing keys<br/><button onclick=\"createAllMissingAttributes()\" style=\"position:absolute;top:0;right:0\">CREATE ALL MISSING KEYS</button><br/>";
 			tt.innerHTML="No missing translations<br/>";
 			
 			if(l2==l1){show_modal('le lingue inserite sono uguali, babbo!')}else{
@@ -834,7 +845,7 @@ var ihtml='<select style="display:inline-block" name="to" id="lang"><option valu
 									var onclick='send(`'+l2+'`,`'+k+'`,`'+escl1+'`,`'+att+'`,true);this.parentElement.parentElement.removeChild(this.parentElement)';
 									
 									var dataies='{&quot;cat&quot;:&quot;'+k+'&quot;,&quot;lang&quot;:&quot;'+l2+'&quot;,&quot;defa&quot;:&quot;'+att+'&quot;,&quot;defv&quot;:&quot;'+escl1+'&quot;}'
-									ies.ins(ma,'label',false,'missing attribute, existing in <span style="color:red">'+l1+'/'+k+'</span> not existing in <span style="color:red">'+l2+'/'+k+'</span>. attribute name: <span style="color:#00afff">'+att+'</span><button class="log-button missing-attribute" data-ies="'+dataies+'" onclick="'+onclick+'">Create attribute</button><br/>')
+									ies.ins(ma,'label',false,'missing key, existing in <span style="color:red">'+l1+'/'+k+'</span> not existing in <span style="color:red">'+l2+'/'+k+'</span>. attribute name: <span style="color:#00afff">'+att+'</span><button class="log-button missing-attribute" data-ies="'+dataies+'" onclick="'+onclick+'">Create key</button><br/>')
 								}else{
 									//existing
 									if(l2JSON[k][att]==l1JSON[k][att]){
@@ -913,11 +924,11 @@ var ihtml='<select style="display:inline-block" name="to" id="lang"><option valu
 	var onmouseleave='this.previousElementSibling.classList.remove(`active`)';
 	var onclick='dlt(gid(`language`).value,gid(`parent`).value,gid(`'+data1+'`).getAttribute(`data-ies-old`));send(gid(`language`).value,gid(`parent`).value,gid(`'+data2+'`).value,gid(`'+data1+'`).value,true);this.classList.remove(`edited-save`)'
 	ies.ins(p,'textarea',['class','attribute-editor','id',data1,'data-ies-old',key,'child',data2,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.nextElementSibling.classList.add(`edited-save`)'],key);
-	ies.ins(p,'button',['class','save-editor all-save','id-ies',data1,'data-sibling',data2,'onclick',onclick,'onmousover',onmouseover,'onmouseleave',onmouseleave],'SALVA');
+	ies.ins(p,'button',['class','save-editor all-save','id-ies',data1,'data-sibling',data2,'onclick',onclick,'onmousover',onmouseover,'onmouseleave',onmouseleave],'SAVE');
 	ies.ins(p,'textarea',['class','value-editor','id',data2,'data-ies-old',key,'parent',data1,'onfocus','this.setSelectionRange(0, this.value.length)','onchange','this.previousElementSibling.classList.add(`edited-save`)'],v[key]);
 	var b=ies.ins(p,'button',['class','translate-button'],false)
 	ies.ins(b,'a',['target','_blank','href','https://translate.google.it/#auto/'+l+'/'+encodeURIComponent(v[key])+'','style','display:inline-block;margin-right:10px'],'<i class="material-icons">g_translate</i>');
-	//ies.ins(p,'button',['class','save-editor','id-ies',data2,'data-sibling',data1,'onclick','dlt(gid(`language`).value,gid(`parent`).value,gid(`'+data1+'`).getAttribute(`data-ies-old`));send(gid(`language`).value,gid(`parent`).value,gid(`'+data2+'`).value,gid(`'+data1+'`).value)','onmousover','this.previousElementSibling.classList.add(`active`)','onmouseleave','this.previousElementSibling.classList.remove(`active`)'],'SALVA');
+	//ies.ins(p,'button',['class','save-editor','id-ies',data2,'data-sibling',data1,'onclick','dlt(gid(`language`).value,gid(`parent`).value,gid(`'+data1+'`).getAttribute(`data-ies-old`));send(gid(`language`).value,gid(`parent`).value,gid(`'+data2+'`).value,gid(`'+data1+'`).value)','onmousover','this.previousElementSibling.classList.add(`active`)','onmouseleave','this.previousElementSibling.classList.remove(`active`)'],'SAVE');
 	var br=document.createElement('br');
 	p.appendChild(br);
 	}
