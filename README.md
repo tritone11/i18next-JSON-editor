@@ -1,4 +1,4 @@
-# ies18n - extended tool to edit your i18next JSON files
+# ies18n - extended tool to edit your i18next JSON files v0.015
 This tool let upload, edit, download your language files of i18next for translation.  
   
 [WORKING DEMO](http://cerati.org/i18next-JSON-editor/)  
@@ -7,7 +7,7 @@ You can only read, every write option is not allowed in the demo to prevent trol
  
   
 ## Features  
-- v0.01 supports only one level of nested objects.   
+- v0.015 supports only one level of nested objects.   
 Example of supported JSON file:  
 
   ```
